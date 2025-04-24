@@ -21,3 +21,7 @@
 //     console.log(a+b);
     
 // }
+
+// implicit return
+
+const mul = (a,b) => a*b;
