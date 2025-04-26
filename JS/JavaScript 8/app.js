@@ -41,3 +41,13 @@
 // let ans = nums.filter((el)=>{
 //     return el % 2 ==0;
 // });
+
+
+// Every 
+//Return true if every element of array gives true for some function . Else return false
+
+// let arr = [1,2,3,4]
+
+// arr.every((el) =>{
+//     el%2==0;
+// })
