@@ -87,3 +87,17 @@
 // )
 
 // console.log(ans);
+
+//FIND MIN NUMBER IN A ARRAY
+
+let arr = [11,33,2,5];
+
+let min = arr.reduce((min,el)=>{
+    if(el<min){
+        return el;
+    }else{
+        return min;
+    }
+})
+
+console.log(min);
