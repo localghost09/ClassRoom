@@ -114,3 +114,10 @@
 
 // const arr = [1,3,4,4,5];
 // console.log(...arr);
+
+
+// SPREAD Array literals
+
+let arr = [1,2,3,4,5];
+let newArr = [...arr];
+console.log(newArr);
