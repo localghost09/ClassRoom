@@ -101,3 +101,10 @@
 // })
 
 // console.log(min);
+
+
+//Giving a default value to the arguments
+
+// function sum(a,b=4){
+//     return a + b;
+// }
