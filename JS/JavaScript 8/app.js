@@ -131,3 +131,16 @@
 // }
 
 // let dataCopy = {...data,id:123,country:'india'};
+
+//REST 
+// allows a function to take an indentifies number of arguments and bundle them in array
+
+// function sum(...args){
+//     //arguments
+//     for(let i=0; i<args.length; i++){
+//         console.log('you gave us ', args[i]);
+        
+//     }
+// }
+
+// console.log(sum(1,2,3,4,5));
