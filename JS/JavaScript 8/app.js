@@ -51,3 +51,17 @@
 // arr.every((el) =>{
 //     el%2==0;
 // })
+
+
+//Reduce 
+//Reduce the array to a single value
+
+
+// let nums  = [1,2,3,4];
+
+// let finalVal = nums.reduce((res,el)=>{
+//     return res+el;
+// })
+
+// console.log(finalVal);
+// output 10 
