@@ -109,3 +109,8 @@
 //     return a + b;
 // }
 
+// SPREAD
+//Expands an iterable into multiple values
+
+// const arr = [1,3,4,4,5];
+// console.log(...arr);
