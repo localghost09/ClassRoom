@@ -118,6 +118,16 @@
 
 // SPREAD Array literals
 
-let arr = [1,2,3,4,5];
-let newArr = [...arr];
-console.log(newArr);
+// let arr = [1,2,3,4,5];
+// let newArr = [...arr];
+// console.log(newArr);
+
+
+//SPREADM WITH OBJECT LITERALS
+
+// let data = {
+//     email:'nikhil@gmail.com',
+//     password:'ghost',
+// }
+
+// let dataCopy = {...data,id:123,country:'india'};
