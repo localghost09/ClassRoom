@@ -79,3 +79,11 @@
 // });
 
 // console.log(max);
+
+// CHECK IF ALL  NUMBER IN ARRAY ARE MULTIPLE OF 10 
+// let  nums = [10,20,9,40];
+
+// let ans = nums.every((el)=> el %10 == 0
+// )
+
+// console.log(ans);
