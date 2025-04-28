@@ -65,3 +65,17 @@
 
 // console.log(finalVal);
 // output 10 
+
+// MAX VALUE IN ARRAY
+
+// let arr = [1,2,3,4,77,9];
+
+// let max = arr.reduce((max,el)=>{
+//     if(el>max){
+//         return el;
+//     } else{
+//         return max;
+//     }
+// });
+
+// console.log(max);
