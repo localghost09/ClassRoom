@@ -151,3 +151,16 @@
 // let names = ['tony','bruce','steve','peter'];
 // let [winner, runnerup] = names;
 // console.log(winner,runnerup);
+
+//Destrucuring Objects
+
+// const students = {
+//     name:'nikhil',
+//     age:22,
+//     class:9,
+//     subjects:['hindi', 'math','science'],
+//     username:'nikhilprataps66@gmail.com',
+//     password:'abcde',
+// };
+
+// let {username,password} = students;
