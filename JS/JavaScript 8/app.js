@@ -144,3 +144,10 @@
 // }
 
 // console.log(sum(1,2,3,4,5));
+
+//Destructuring 
+//Storing values of array into multiple variables
+
+// let names = ['tony','bruce','steve','peter'];
+// let [winner, runnerup] = names;
+// console.log(winner,runnerup);
