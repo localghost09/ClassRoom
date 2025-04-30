@@ -186,6 +186,12 @@
 
 // console.log(num);
 
+// Qs3.Create a new array whose elements are in uppercase of words present in the original array
+
+// const string = ['nikhil','aditi','kannu', 'annu','raju'];
+
+// console.log(string.map((strings)=> strings.toUpperCase()));
+
 
 
 
