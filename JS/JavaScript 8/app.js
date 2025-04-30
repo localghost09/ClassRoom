@@ -178,7 +178,13 @@
 // let avg=sum/nums.length;
 // console.log(avg)
 
+//Create a new array using the map function whose each element is equal to the original element plus 5
 
+// const numbers = [1,2,3,4];
+
+// const num = numbers.map((num)=> num+5);
+
+// console.log(num);
 
 
 
