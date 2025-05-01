@@ -21,3 +21,13 @@
 // Returns the element as an HTML collection or empty collection (if not found)
 
 // document.getElementsByTagName("p");
+
+//Query Selectors 
+//Allow us to use any CSS selector
+
+//select single element those identify first
+// document.querySelector("p");
+
+// // for selecting all css selector
+
+// console.dir(document.querySelectorAll("p"));
