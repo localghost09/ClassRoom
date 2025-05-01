@@ -16,3 +16,8 @@
 // console.log(document.getElementsByClassName("oldImg"));
 // // give the value of first image 
 // console.log(document.getElementsByClassName("oldImg")[0]);
+
+// getElementByTagName
+// Returns the element as an HTML collection or empty collection (if not found)
+
+// document.getElementsByTagName("p");
