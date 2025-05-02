@@ -31,3 +31,21 @@
 // // for selecting all css selector
 
 // console.dir(document.querySelectorAll("p"));
+
+//Using Properties & mehtods
+
+//innerText
+// shows the visible text contained in a node
+let para = document.querySelector('p');
+console.log(para.innerText);
+
+
+//textContent
+//Shows all the full text
+para.textContent;
+console.log(para.textContent);
+
+//innerHTML
+//shows the full markup
+para.innerHTML
+console.log(para.innerHTML);
