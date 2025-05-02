@@ -36,16 +36,16 @@
 
 //innerText
 // shows the visible text contained in a node
-let para = document.querySelector('p');
-console.log(para.innerText);
+// let para = document.querySelector('p');
+// console.log(para.innerText);
 
 
-//textContent
-//Shows all the full text
-para.textContent;
-console.log(para.textContent);
+// //textContent
+// //Shows all the full text
+// para.textContent;
+// console.log(para.textContent);
 
-//innerHTML
-//shows the full markup
-para.innerHTML
-console.log(para.innerHTML);
+// //innerHTML
+// //shows the full markup
+// para.innerHTML
+// console.log(para.innerHTML);
