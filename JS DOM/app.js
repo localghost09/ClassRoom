@@ -49,3 +49,8 @@
 // //shows the full markup
 // para.innerHTML
 // console.log(para.innerHTML);
+
+//Manipulating Attributes
+// let Image = document.querySelector('img');
+// Image.getAttribute('id')
+// Image.setAttribute('id' , 'mainHFS');
