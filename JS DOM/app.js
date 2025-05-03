@@ -72,6 +72,15 @@
 
 
 //Manipulating Style (using classList)
+
+//classList.add() to add new classes
+//classList.remove() to remove classes
+//classList.contains() to check if class exists
+//classList.toggle() to toggle btw add and remove
+
+
+
+
 // let heading = document.querySelector('h1');
 
 // heading.classList.add('green');
