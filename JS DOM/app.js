@@ -60,3 +60,11 @@
 // let heading = document.querySelector('h1');
 // heading.style.color = 'red';
 // it changes the color of h1 heading 
+
+// changes the color of all links into pink color
+
+// let links = document.querySelectorAll(".box a");
+
+// for(let i=0; i<links.length; i++){
+//     links[i].style.color = 'pink';
+// }
