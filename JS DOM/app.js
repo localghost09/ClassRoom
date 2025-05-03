@@ -68,3 +68,10 @@
 // for(let i=0; i<links.length; i++){
 //     links[i].style.color = 'pink';
 // }
+
+
+
+//Manipulating Style (using classList)
+// let heading = document.querySelector('h1');
+
+// heading.classList.add('green');
