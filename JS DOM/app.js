@@ -54,3 +54,6 @@
 // let Image = document.querySelector('img');
 // Image.getAttribute('id')
 // Image.setAttribute('id' , 'mainHFS');
+
+const h = 5;
+console.log(h);
