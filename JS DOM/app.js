@@ -55,5 +55,8 @@
 // Image.getAttribute('id')
 // Image.setAttribute('id' , 'mainHFS');
 
-const h = 5;
-console.log(h);
+
+//Manipulating Style(with style attribute)
+// let heading = document.querySelector('h1');
+// heading.style.color = 'red';
+// it changes the color of h1 heading 
