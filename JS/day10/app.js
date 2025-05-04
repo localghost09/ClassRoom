@@ -58,3 +58,13 @@
 //     let color = `rgb(${red},${green},${blue})`;
 //     return color;
 // }
+
+
+
+//Event Listner For elements 
+
+// let pr = document.querySelector("p");
+
+// pr.addEventListener("click", function(){
+//     alert('try to copy ');
+// })
