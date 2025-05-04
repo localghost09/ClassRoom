@@ -78,9 +78,8 @@
 //classList.contains() to check if class exists
 //classList.toggle() to toggle btw add and remove
 
-
-
-
 // let heading = document.querySelector('h1');
 
 // heading.classList.add('green');
+
+//Navigation
