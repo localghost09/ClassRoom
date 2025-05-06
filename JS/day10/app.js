@@ -137,3 +137,17 @@
 //     e.preventDefault();
 //     alert("form was submited");
 // });
+
+//Extracting Form Data
+
+// let form = document.querySelector("form");
+
+// form.addEventListener("submit", function(e){
+//     e.preventDefault();
+
+//     let inp = document.querySelector('input');
+//     console.log(inp);
+    
+// })
+
+
