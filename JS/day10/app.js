@@ -151,19 +151,35 @@
 // })
 
 
-let form = document.querySelector("form");
+// let form = document.querySelector("form");
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
+// form.addEventListener("submit", function(e){
+//     e.preventDefault();
 
-    let user = document.querySelector("#user");
-    let pass = document.querySelector("#pass");
+//     let user = document.querySelector("#user");
+//     let pass = document.querySelector("#pass");
 
-    console.log(user.value);
-    console.log(pass.value);
+//     console.log(user.value);
+//     console.log(pass.value);
     
 
-    alert(`Hi ${user.value}, your password is set to ${pass.value}`)
+//     alert(`Hi ${user.value}, your password is set to ${pass.value}`)
     
-});
+// });
+
+
+
+//More Events 
+//change event 
+// the event occurs when the value of an element has been changed (only works on <input>, <textarea> and and <select> elements);
+const iE = document.querySelector("#user");
+
+iE.addEventListener("change", function(){
+   
+    console.log("Changed on screen");
+    
+})
+
+// input event 
+// the input event fires when the value of an <input>, <select> , or <textarea> element has been changed.
 
