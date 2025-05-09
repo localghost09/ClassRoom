@@ -23,3 +23,21 @@
         
 //     })
 // }
+
+
+//ToDo App
+
+// let btn = document.querySelector("button");
+// let ul = document.querySelector("ul");
+
+// let input = document.querySelector("input");
+
+// btn.addEventListener("click", function(){
+//     let item = document.createElement("li");
+//     item.innerText = input.value;
+//     ul.appendChild(item); // add the item value in ul as a child
+    
+//     input.value="";
+    
+// })
+
