@@ -29,14 +29,33 @@ function three(){
 
 // console.log("happy birthday adi");
 
-// h1 = document.querySelector("h1");
+// h1 = document.querySelector("h1"); // Using Promises
 
-// function changeColor(color,delay,nextColorChange){
-//     setTimeout(()=>{
+// function changeColor(color,delay){
+
+//     return new Promise((resolve , reject)=>{
+//         setTimeout(()=>{
 //         h1.style.color= color;
-//         if(nextColorChange) nextColorChange();
+//         resolve("color changed");
+        
 //     },delay);
+//     });
+    
 // }
+
+// changeColor("red",1000)
+// .then(()=>{
+//     console.log("red color was changed");
+//     return changeColor("orange", 1000);
+// })
+// .then(()=>{
+//     console.log("orange color was changed");
+//     return changeColor("blue",1000);    
+// })
+// .then(()=>{
+//     console.log("blue color was chaged");
+    
+// })
 
 
 // changeColor("red",1000,()=>{
@@ -50,3 +69,45 @@ function three(){
 // })
 
 // callback nesting -> callback hell
+
+
+//Promises
+// the promises object represent the eventual completion (or failure) of an asynchronization operation and its resulting value .
+
+
+// function savetoDb(data){
+//     let intSpeed = Math.floor(Math.random()*10)+1;
+//     if(intSpeed>4){
+//         console.log("your data was saved",data);
+        
+//     }else{
+//         console.log("weak connection your data was not saved");
+        
+//     }
+// }
+
+
+// function savetoDb(data){
+//     return new Promise((resolve,reject) =>{
+//         let intSpeed =  Math.floor(Math.random()*10)+1;
+//         if(intSpeed>4){
+//             resolve("sucess: data was saved");
+//         }else{
+//             reject("failure: weak connection data was not saved");
+//         }
+//     });
+// }
+
+// let request = savetoDb("apna college") // req = promise object
+// .then(()=>{
+//     console.log("Data 1 was saved : promise was resolved");
+//     savetoDb("kannu")
+//     .then(()=>{
+//         console.log("data 2 was saved");
+        
+//     })
+// })
+// .catch(()=>{
+//     console.log("Promise was rejected");
+    
+// })
