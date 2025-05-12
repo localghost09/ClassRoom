@@ -3,4 +3,4 @@ const mul = (a,b) => a*b;
 const sub = (a,b) => a-b;
 
 
-module.exports = sum;
+module.exports = sum; // a special objects 
