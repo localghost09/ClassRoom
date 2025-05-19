@@ -8,8 +8,16 @@ app.listen(port, ()=>{
     
 })
 
-app.use((req,res)=>{
-    console.log("request recived");
-    res.send("Hello Nikhil");
-    
+
+
+app.get("/", (req , res)=>{
+    res.send("Hey you requested home page")
+})
+
+app.get("/about", (req,resp)=>{
+    resp.send("Hello this is about");
+})
+
+app.get("/help" , (req,res)=>{
+    res.send("THis is the help page ")
 })
