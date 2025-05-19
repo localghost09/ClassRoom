@@ -14,8 +14,9 @@ app.get("/", (req, resp) => {
 });
 
 app.get("/ig/:username",(req,resp)=>{
+    let followers = ['addam', 'kannu', 'addi','manshu'];
     let {username} = req.params;
-    resp.render("instagram.ejs",{username});
+    resp.render("instagram.ejs",{username,followers});
     
 })
 
