@@ -7,3 +7,9 @@ app.listen(port, ()=>{
     console.log(`app listening on port ${port}`);
     
 })
+
+app.use((req,res)=>{
+    console.log("request recived");
+    res.send("Hello Nikhil");
+    
+})
