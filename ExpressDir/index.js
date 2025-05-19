@@ -14,10 +14,13 @@ app.get("/", (req , res)=>{
     res.send("Hey you requested home page")
 })
 
-app.get("/about", (req,resp)=>{
-    resp.send("Hello this is about");
-})
 
-app.get("/help" , (req,res)=>{
-    res.send("THis is the help page ")
+
+app.get("/search",(req,res)=>{
+    let {q} = req.query;
+    if(!q){
+        res.send("Nothing searched")
+    }
+    res.send(`<h1>search result for query @${q} </h1>`);
+    
 })
