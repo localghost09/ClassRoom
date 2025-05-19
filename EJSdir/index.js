@@ -2,6 +2,7 @@ const { log } = require("console");
 const express = require("express");
 const path = require("path"); // <-- fixed here
 
+
 const app = express();
 
 let port = 8080;
@@ -14,9 +15,16 @@ app.get("/", (req, resp) => {
 });
 
 app.get("/ig/:username",(req,resp)=>{
-    let followers = ['addam', 'kannu', 'addi','manshu'];
     let {username} = req.params;
-    resp.render("instagram.ejs",{username,followers});
+    const instadata = require("./views/data.json");
+    const data = instadata[username];
+
+    if (!data) {
+        return resp.send(`<h1>User "${username}" not found.</h1>`);
+    }
+    
+    
+    resp.render("instagram.ejs",{ data });
     
 })
 
