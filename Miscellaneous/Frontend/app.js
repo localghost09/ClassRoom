@@ -5,3 +5,10 @@ const st = {
 }
 
 // Object Oriented Programming
+//Prototype
+
+
+let arr = [1,2,3];
+
+arr.sayhello = () =>{console.log("hello i am arr");
+}
