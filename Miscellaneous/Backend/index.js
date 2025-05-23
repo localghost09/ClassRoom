@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.urlencoded({extended:true}));
-app.use(express.json);
+app.use(express.json());
 
 const port = 8080;
 
@@ -13,9 +13,9 @@ app.get("/register", (req,resp)=>{
 });
 
 app.post("/register",(req, resp)=>{
-    console.log(req.body);
-    let {user,password}= req.query;
-    resp.send(`standard post request ${user}`)
+   
+    let {user,password}= req.body;
+    resp.send(`standard post request welcome ${user}`);
 })
 
 app.listen(port,()=>{
