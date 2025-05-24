@@ -33,3 +33,19 @@ const st = {
 //     };
 //     return person;
 // }
+
+// New Operator
+// Constructors - doesn't return anything & start with capital
+
+function PersonMaker(name,age){
+    this.name = name;
+    this.age = age;
+}
+
+PersonMaker.prototype.talk = function (){
+    console.log(`hi , my name is ${this.name}`);
+    
+}
+
+let p1 = new PersonMaker("nikhil",25);
+let p2 = new PersonMaker("kannu", 23);
