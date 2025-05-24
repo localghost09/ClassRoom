@@ -49,3 +49,26 @@ const st = {
 
 // let p1 = new PersonMaker("nikhil",25);
 // let p2 = new PersonMaker("kannu", 23);
+
+
+
+// Classes 
+// classes are a template for creating objects
+
+
+// The constructor method is a special method of a class for creating and initializing an object instance of tha class.
+
+class Person {
+    constructor(name,age) {
+        this.name = name;
+        this.age = age;
+
+    }
+    talk(){
+        console.log(`he , my name is ${this.name}`);
+        
+    }
+}
+
+let p1 = new Person("nikhil",25);
+let p2 = new Person("kannu", 23);
