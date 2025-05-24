@@ -8,7 +8,13 @@ const st = {
 //Prototype
 
 
-let arr = [1,2,3];
+let arr1 = [1,2,3];
+let arr2 = [1,2,3];
 
-arr.sayhello = () =>{console.log("hello i am arr");
+arr1.sayhello = () =>{
+    console.log("hello , i am arr");
+    
+}
+
+arr2.sayhello = () =>{console.log("hello i am arr");
 }
