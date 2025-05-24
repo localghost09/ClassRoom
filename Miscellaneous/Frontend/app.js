@@ -72,3 +72,33 @@ class Person {
 
 let p1 = new Person("nikhil",25);
 let p2 = new Person("kannu", 23);
+
+
+// Inheritance
+
+class Student {
+    constructor(name,age,marks){
+        this.name = name;
+        this.age = age;
+        this.marks = marks;
+    }
+    talk(){
+        console.log(`he i am ${this.name}`);
+        
+    }
+}
+
+let stu1 = new Student("adam", 25,95);
+
+class Teacher {
+    constructor(name,age,subject) {
+        this.name = name;
+        this.age =age;
+        this.subject = subject;
+        
+    }
+    talk(){
+        console.log(`he, i am ${this.name}`);
+        
+    }
+}
