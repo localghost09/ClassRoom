@@ -34,3 +34,14 @@ app.get("/posts" ,(req,resp)=>{
     resp.render("index.ejs", {posts});
 })
 
+app.get("/posts/new", (req,resp)=>{
+    resp.render("new.ejs");
+})
+
+app.post("/posts", (req,resp)=>{
+    let {username, content} = req.body;
+    posts.push({username,content});
+    resp.send("post rewuest working");
+    
+});
+
