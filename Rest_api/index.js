@@ -11,15 +11,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let posts = [
     {
+        id :1,
         username: "localghost678",
         content : "I Love coding",
     },
 
     {
+        id : 2,
         username :"kannu678",
         content : " i love localghost678",
     },
     {
+        id :3,
         username: "aditi678",
         content : " i love kannu",
     },
@@ -47,3 +50,11 @@ app.post("/posts", (req,resp)=>{
     
 });
 
+app.get("/posts/:id", (req, resp) => {
+    const { id } = req.params;
+    const post = posts.find(p => p.id == id);
+    if (!post) {
+        return resp.send("Post not found");
+    }
+    resp.render("indpost.ejs", { post });
+});
