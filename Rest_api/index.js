@@ -41,7 +41,9 @@ app.get("/posts/new", (req,resp)=>{
 app.post("/posts", (req,resp)=>{
     let {username, content} = req.body;
     posts.push({username,content});
-    resp.send("post rewuest working");
+    // resp.send("post rewuest working");
+    resp.redirect("http://localhost:8080/posts");
+
     
 });
 
