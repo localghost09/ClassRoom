@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const path = require("path");
+const {v4:uuidv4} = require('uuid');
+uuidv4();
 
 app.use(express.urlencoded({extended: true}));
 
@@ -11,18 +13,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let posts = [
     {
-        id :"1a",
+        id :uuidv4(),
         username: "localghost678",
         content : "I Love coding",
     },
 
     {
-        id : "1b",
+        id : uuidv4(),
         username :"kannu678",
         content : " i love localghost678",
     },
     {
-        id :"1c",
+        id :uuidv4(),
         username: "aditi678",
         content : " i love kannu",
     },
@@ -43,9 +45,10 @@ app.get("/posts/new", (req,resp)=>{
 
 app.post("/posts", (req,resp)=>{
     let {username, content} = req.body;
-    posts.push({username,content});
+    let id = uuidv4();
+    posts.push({id,username,content});
     // resp.send("post rewuest working");
-    resp.redirect("http://localhost:8080/posts");
+    resp.redirect("/posts");
 
     
 });
