@@ -30,11 +30,6 @@ let posts = [
     },
 ];
 
-app.listen(port, ()=>{
-    console.log(`Listening to port : ${port}`);
-    
-});
-
 app.get("/posts" ,(req,resp)=>{
     resp.render("index.ejs", {posts});
 })
@@ -72,3 +67,14 @@ app.patch("/posts/:id",(req,resp)=>{
     
     resp.send("patch request working");
 })
+
+app.get("/posts/:id/edit",(req,resp)=>{
+    let {id} = req.params;
+    let post = post.find((p)=> id === p.id);
+    resp.render("edit.ejs",{post})
+})
+
+app.listen(port, ()=>{
+    console.log(`Listening to port : ${port}`);
+    
+});
