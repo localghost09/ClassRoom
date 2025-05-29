@@ -61,3 +61,14 @@ app.get("/posts/:id",(req,resp)=>{
     }
     resp.render("indpost.ejs",{post})
 })
+
+app.patch("/posts/:id",(req,resp)=>{
+    let {id} = req.params;
+    let newContent = req.body.content;
+    let post = posts.find((p) => id === p.id);
+    post.content = newContent;
+    console.log(post);
+    
+    
+    resp.send("patch request working");
+})
