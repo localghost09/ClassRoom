@@ -1,9 +1,11 @@
 const express = require("express");
+const methodOverride = require('method-override');
 const app = express();
 const port = 8080;
 const path = require("path");
 const {v4:uuidv4} = require('uuid');
 uuidv4();
+app.use(methodOverride('_method'))
 
 app.use(express.urlencoded({extended: true}));
 
@@ -57,6 +59,8 @@ app.get("/posts/:id",(req,resp)=>{
     resp.render("indpost.ejs",{post})
 })
 
+
+
 app.patch("/posts/:id",(req,resp)=>{
     let {id} = req.params;
     let newContent = req.body.content;
@@ -65,14 +69,14 @@ app.patch("/posts/:id",(req,resp)=>{
     console.log(post);
     
     
-    resp.send("patch request working");
+    resp.redirect("/posts");
 })
 
 app.get("/posts/:id/edit",(req,resp)=>{
     let {id} = req.params;
-    let post = post.find((p)=> id === p.id);
-    resp.render("edit.ejs",{post})
-})
+    let post = posts.find((p)=> id === p.id);
+    resp.render("edit.ejs",{post});
+});
 
 app.listen(port, ()=>{
     console.log(`Listening to port : ${port}`);
