@@ -89,4 +89,6 @@ app.listen(port, ()=>{
     
 });
 
-app.get();
+app.get("/posts/:id",(req,resp)=>{
+    resp.send("get request is working");
+});
