@@ -2,8 +2,12 @@ const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
 const express = require('express');
 const app = express();
+const path = require("path");
 
 const port = 8080;
+
+app.set("view engine","ejs");
+app.set("views", path.join(__dirname,"/views"));
 
 
 const connection = mysql.createConnection({
@@ -42,8 +46,8 @@ app.get("/",(req,resp)=>{
   try{
 connection.query(q, (err,result)=>{
   if(err) throw err;
-  console.log(result);
-  resp.send(result);
+  let count = result[0]["count(*)"];
+  resp.render("home.ejs",{count});
 });
 }catch(err){
   console.log(err);
