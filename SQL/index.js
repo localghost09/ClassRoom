@@ -1,5 +1,10 @@
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
+const express = require('express');
+const app = express();
+
+const port = 8080;
+
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -17,29 +22,41 @@ const getRandomUser = () => {
     faker.internet.password(),
   ];
 }
-//Inserting New Data
-let q = "INSERT INTO user (id, username, email, password) VALUES ?"; // for multiple we only use ?
-//let user = ["123", "123_newuser", "abcd@gamil.com", "abcde"]
-
-let data = [];
-for(let i=1; i<=100; i++){
-  data.push(getRandomUser());
-}
 
 
-try{
-connection.query(q,[data], (err,result)=>{
+
+// try{
+// connection.query(q,[data], (err,result)=>{
+//   if(err) throw err;
+//   console.log(result);
+  
+// });
+// }catch(err){
+//   console.log(err);
+  
+// }
+// connection.end();
+
+app.get("/",(req,resp)=>{
+  let q = `SELECT count(*) FROM user`;
+  try{
+connection.query(q, (err,result)=>{
   if(err) throw err;
   console.log(result);
-  
+  resp.send(result);
 });
 }catch(err){
   console.log(err);
+  resp.send("some error in DB");
   
 }
-connection.end();
+  
+});
 
-
+app.listen(port,(req,resp)=>{
+  console.log(`Server is listening to port ${port}`);
+  
+})
 
 
 
