@@ -57,6 +57,21 @@ connection.query(q, (err,result)=>{
   
 });
 
+// user route
+app.get("/users",(req,resp)=>{
+  let q = `SELECT * FROM user`;
+  try{
+    connection.query(q,(err,users)=>{
+      if(err) throw err;
+     
+      resp.render("users.ejs",{users});
+      
+    });
+  }catch(err){
+    resp.send("some error occured");
+  }
+});
+
 app.listen(port,(req,resp)=>{
   console.log(`Server is listening to port ${port}`);
   
