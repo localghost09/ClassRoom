@@ -11,6 +11,13 @@
     </style>
 </head>
 <body>
+    <!-- Add this above your <table> in users.ejs -->
+<a href="/users/new">
+    <button type="button">Add User</button>
+</a>
+<br>
+<br>
+<hr>
     <table>
         <tr>
             <th>Id</th>
@@ -27,7 +34,15 @@
                         <button>
                             Edit username
                         </button>
+                        
                     </form>
+                </td>
+                <td>
+                    
+                        <a href="/user/<%= user.id %>/delete">
+                            <button type="button">Delete</button>
+                        </a>
+                    
                 </td>
             </tr>
         <% } %>    

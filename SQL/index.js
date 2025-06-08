@@ -119,6 +119,60 @@ app.patch("/user/:id",(req,resp)=>{
   }
   
 })
+
+// add new user
+app.get("/users/new",(req,resp)=>{
+  resp.render("new.ejs");
+})
+
+app.post("/users", (req, resp) => {
+    const { id, email, username, password } = req.body;
+    const q = "INSERT INTO user (id, email, username, password) VALUES (?, ?, ?, ?)";
+    connection.query(q, [id, email, username, password], (err, result) => {
+        if (err) {
+            console.log(err);
+            return resp.send("Error adding user");
+        }
+        resp.redirect("/users");
+    });
+});
+
+app.get("/user/:id/delete", (req, resp) => {
+    const { id } = req.params;
+    const q = "SELECT * FROM user WHERE id = ?";
+    connection.query(q, [id], (err, result) => {
+        if (err || !result[0]) return resp.send("User not found");
+        resp.render("delete.ejs", { user: result[0] });
+    });
+});
+
+
+app.delete("/user/:id", (req, resp) => {
+    const { id } = req.params;
+    const { email, password ,username } = req.body;
+    const q = "SELECT * FROM user WHERE id = ?";
+    connection.query(q, [id], (err, result) => {
+        if (err) {
+            console.log(err);
+            return resp.send("Error finding user");
+        }
+        const user = result[0];
+        if (!user) return resp.send("User not found");
+        if (user.email !== email || user.password !== password || user.username !==username) {
+            return resp.send("Email , password or username incorrect");
+        }
+        // Credentials correct, delete user
+        const delQ = "DELETE FROM user WHERE id = ?";
+        connection.query(delQ, [id], (err2, result2) => {
+            if (err2) {
+                console.log(err2);
+                return resp.send("Error deleting user");
+            }
+            resp.redirect("/users");
+        });
+    });
+});
+
 app.listen(port,(req,resp)=>{
   console.log(`Server is listening to port ${port}`);
   
