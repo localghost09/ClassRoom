@@ -49,11 +49,20 @@ const User = mongoose.model("User", userSchema);
 // })
 
 
-User.find({age : {$gt : 20}})
-.then((res)=>{
+// User.find({age : {$gt : 20}})
+// .then((res)=>{
+//     console.log(res);
+    
+// }).catch((err)=>{
+//     console.log(err);
+    
+// })
+
+
+
+
+
+User.updateOne({name:"paras"},{age:32}).then((res)=>{
     console.log(res);
     
-}).catch((err)=>{
-    console.log(err);
-    
-})
+});
