@@ -62,7 +62,14 @@ const User = mongoose.model("User", userSchema);
 
 
 
-User.updateOne({name:"paras"},{age:32}).then((res)=>{
+// User.updateOne({name:"paras"},{age:32}).then((res)=>{
+//     console.log(res);
+    
+// });
+
+
+
+User.findOneAndUpdate({name:"paras"},{age:42},{new:true}).then((res)=>{
     console.log(res);
     
 });
