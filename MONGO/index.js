@@ -69,7 +69,25 @@ const User = mongoose.model("User", userSchema);
 
 
 
-User.findOneAndUpdate({name:"paras"},{age:42},{new:true}).then((res)=>{
+// User.findOneAndUpdate({name:"paras"},{age:42},{new:true}).then((res)=>{
+//     console.log(res);
+    
+// });
+
+
+// delete one data 
+// User.deleteOne({name:"Adam"}).then((res)=>{
+//     console.log(res);
+    
+// });
+
+
+// delete many data based on conditions
+
+User.deleteMany({ age: { $gt : 22} }).then((res)=>{
     console.log(res);
     
-});
+})
+
+//findByIdAndDelete()
+//findOneAndDelete()
