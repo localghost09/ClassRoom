@@ -36,10 +36,7 @@ chat1.save().then((res)=>{
     console.log(err);
 })
 
-chat.deleteMany({from:"kannu"}).then((res)=>{
-    console.log(res);
-    
-})
+
 
 app.get("/",(req,resp)=>{
     resp.send("working");
