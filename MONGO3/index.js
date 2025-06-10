@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
+const chat = require('./models/chat.js');
+
+
+
+const port = 8080;
 
 app.set("viwes", path.join(__dirname, "views"));
 app.set("view engine" , "ejs");
@@ -18,8 +23,23 @@ async function main() {
 
 }
 
+let chat1 = new chat({
+    from : "kannu",
+    to : "nikhil",
+    msg : "hey nikhil i love you",
+    created_at : new Date()
+});
 
-const port = 8080;
+chat1.save().then((res)=>{
+    console.log(res);
+}).catch((err)=>{
+    console.log(err);
+})
+
+chat.deleteMany({from:"kannu"}).then((res)=>{
+    console.log(res);
+    
+})
 
 app.get("/",(req,resp)=>{
     resp.send("working");
