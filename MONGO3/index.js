@@ -8,8 +8,9 @@ const chat = require('./models/chat.js');
 
 const port = 8080;
 
-app.set("viwes", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine" , "ejs");
+app.use(express.static(path.join(__dirname,"public")));
 
 
 
@@ -40,6 +41,13 @@ chat1.save().then((res)=>{
 
 app.get("/",(req,resp)=>{
     resp.send("working");
+})
+
+app.get("/chats",async(req,resp)=>{
+    let chats = await chat.find();
+    console.log(chats);
+    
+    resp.render("chats.ejs",{chats});
 })
 
 
