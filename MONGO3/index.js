@@ -24,20 +24,6 @@ async function main() {
 
 }
 
-let chat1 = new chat({
-    from : "kannu",
-    to : "nikhil",
-    msg : "hey nikhil i love you",
-    created_at : new Date()
-});
-
-chat1.save().then((res)=>{
-    console.log(res);
-}).catch((err)=>{
-    console.log(err);
-})
-
-
 
 app.get("/",(req,resp)=>{
     resp.send("working");
@@ -48,6 +34,10 @@ app.get("/chats",async(req,resp)=>{
     console.log(chats);
     
     resp.render("chats.ejs",{chats});
+})
+
+app.get("/chats/new", (req,resp)=>{
+    resp.render("new.ejs");
 })
 
 
