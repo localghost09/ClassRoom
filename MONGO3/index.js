@@ -6,11 +6,13 @@ const chat = require('./models/chat.js');
 
 
 
+
 const port = 8080;
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine" , "ejs");
 app.use(express.static(path.join(__dirname,"public")));
+app.use(express.urlencoded ({extended : true}));
 
 
 
@@ -39,6 +41,28 @@ app.get("/chats",async(req,resp)=>{
 // new Route
 app.get("/chats/new", (req,resp)=>{
     resp.render("new.ejs");
+})
+
+// create route 
+
+app.post("/chats",(req,resp)=>{
+    let {from , to , msg } = req.body;
+    let newchat = new chat({
+        from : from,
+        to : to,
+        msg : msg,
+        created_at : new Date()
+    });
+    newchat.save().then((resp)=>{
+        console.log(resp);
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+    console.log(newchat);
+    resp.redirect("/chats");
+    
 })
 
 
