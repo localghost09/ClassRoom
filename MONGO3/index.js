@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const chat = require('./models/chat.js');
+const methodOverride = require("method-override");
 
 
 
@@ -13,6 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine" , "ejs");
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded ({extended : true}));
+app.use(methodOverride("_method"));
 
 
 
@@ -65,6 +67,25 @@ app.post("/chats",(req,resp)=>{
     
 })
 
+
+//Edit Route 
+app.get("/chats/:id/edit",async (req,resp)=>{
+    let {id} = req.params;
+    let foundChat = await chat.findById(id);
+    resp.render("edit.ejs",{chat: foundChat});
+});
+
+// update Route
+app.put("/chats/:id",async(req,resp)=>{
+    let {id} = req.params;
+    let {msg:newMsg} = req.body;
+    let updatedChat = await chat.findByIdAndUpdate(
+        id,
+        {msg:newMsg},
+        {runValidators : true, new:true}
+    );
+    resp.redirect("/chats");
+})
 
 app.listen(port, (req,resp)=>{
     console.log(`Connected Port No : ${port}`);
