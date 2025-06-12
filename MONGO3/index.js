@@ -36,6 +36,7 @@ app.get("/chats",async(req,resp)=>{
     resp.render("chats.ejs",{chats});
 })
 
+// new Route
 app.get("/chats/new", (req,resp)=>{
     resp.render("new.ejs");
 })
