@@ -87,6 +87,14 @@ app.put("/chats/:id",async(req,resp)=>{
     resp.redirect("/chats");
 })
 
+// Destroy Route
+
+app.delete("/chats/:id",async(req,resp)=>{
+    let {id} = req.params;
+    let deleteChat = await chat.findByIdAndDelete(id);
+    resp.redirect("/chats");
+})
+
 app.listen(port, (req,resp)=>{
     console.log(`Connected Port No : ${port}`);
 })
