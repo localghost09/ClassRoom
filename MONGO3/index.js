@@ -92,7 +92,7 @@ app.put("/chats/:id",async(req,resp)=>{
 app.delete("/chats/:id",async(req,resp)=>{
     let {id} = req.params;
     let deleteChat = await chat.findByIdAndDelete(id);
-    resp.redirect("/chats");
+    resp.redirect("/chats"); 
 })
 
 app.listen(port, (req,resp)=>{
