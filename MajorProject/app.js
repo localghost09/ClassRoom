@@ -26,12 +26,17 @@ const port = 8080;
 app.get("/",(req,resp)=>{
     resp.send("working");
 })
-
+//  Index Route
 app.get("/listings",async(req,resp)=>{
     const allListings = await Listing.find({});
     resp.render("../views/listings/index.ejs",{allListings});
 })
 
+
+//Show Route
+app.get("/listings/:id",async(req,resp)=>{
+    
+})
 
 
 // app.get("/testListing",async(req,resp)=>{
