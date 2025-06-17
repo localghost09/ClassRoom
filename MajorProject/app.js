@@ -21,6 +21,7 @@ async function main() {
 
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({extended: true}));
 
 const port = 8080;
 app.get("/",(req,resp)=>{
@@ -35,7 +36,8 @@ app.get("/listings",async(req,resp)=>{
 
 //Show Route
 app.get("/listings/:id",async(req,resp)=>{
-    
+    let {id} = req.params;
+    const listing = await Listing.findById(id);
 })
 
 
