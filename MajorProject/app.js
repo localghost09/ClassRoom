@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const Listening = require("../MajorProject/models/listing.js");
 const Listing = require("../MajorProject/models/listing.js");
 const path = require("path");
+const { log } = require("console");
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
@@ -48,8 +49,9 @@ app.get("/listings/:id",async(req,resp)=>{
 
 //Create Route
 app.post("/listings", async(req,resp)=>{
-    const newListing = new Listing(req.body.listing);
-    await newListing.save();
+    const newlistings = new Listing(req.body.listing);
+    console.log(newlistings);
+    await newlistings.save();
     resp.redirect("/listings");
     
 })
