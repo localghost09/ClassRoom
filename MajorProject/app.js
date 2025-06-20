@@ -5,6 +5,7 @@ const Listening = require("../MajorProject/models/listing.js");
 const Listing = require("../MajorProject/models/listing.js");
 const path = require("path");
 const { log } = require("console");
+const methodoverride = require("method-override")
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
@@ -23,6 +24,7 @@ async function main() {
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
+app.use(methodoverride("_method"));
 
 const port = 8080;
 app.get("/",(req,resp)=>{
@@ -54,6 +56,22 @@ app.post("/listings", async(req,resp)=>{
     await newlistings.save();
     resp.redirect("/listings");
     
+})
+
+//edit Route
+app.get("/listings/:id/edit",async(req,resp)=>{
+    let {id} = req.params;
+    const listing = await Listing.findById(id);
+    resp.render("listings/edit.ejs",{listing});
+})
+
+
+// update route 
+
+app.put("/listings/:id",async(req,resp)=>{
+    let {id} = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    resp.redirect("/listings");
 })
 
 // app.get("/testListing",async(req,resp)=>{
