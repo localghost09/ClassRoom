@@ -54,6 +54,13 @@ app.get("/listings/:id",async(req,resp)=>{
 
 //Create Route
 app.post("/listings", async(req,resp)=>{
+    // Convert string URL to image object if needed
+    if (typeof req.body.listing.image === 'string') {
+        req.body.listing.image = {
+            filename: "listingimage",
+            url: req.body.listing.image
+        };
+    }
     const newlistings = new Listing(req.body.listing);
     console.log(newlistings);
     await newlistings.save();
