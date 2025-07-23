@@ -3,11 +3,19 @@ const app = express();
 
 //middleware -> response send
 
-app.use((req,resp,next)=>{
-    console.log("hi , i am middleware");
-    next();
+// app.use((req,resp,next)=>{
+//     console.log("hi , i am middleware");
+//     next();
     
-});
+// });
+
+
+// Logger
+app.use((req,resp,next)=>{
+    req.time = new Date(Date.now()).toString();
+    console.log(req.method, req.hostname,req.path,req.time);
+    next(); 
+})
 
 app.get("/",(req,resp)=>{
     resp.send("hey i am root"); 
