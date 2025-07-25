@@ -21,6 +21,9 @@ app.get("/wrong",(req,resp)=>{
     abcd = abcd;
 })
 
+
+
+
 // Logger -morgan
 // app.use((req,resp,next)=>{
 //     req.time = new Date(Date.now()).toString();
@@ -35,6 +38,15 @@ app.get("/",(req,resp)=>{
 app.get("/random", (req,resp)=>{
     resp.send("this is random page");
 });
+
+app.use((err,req,resp,next)=>{
+    console.log(err);
+    
+});
+
+app.use((req,resp)=>{
+    resp.status(404).send("Page not found");
+})
 
 app.listen(8080, ()=>{
     console.log("Server Listing to port 8080");
