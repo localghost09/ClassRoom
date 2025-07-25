@@ -35,7 +35,9 @@ app.get("/err",(req,resp)=>{
 })
 
 
-
+app.get("/admin" ,(req,resp)=>{
+    throw new ExpressError(403,"Admin access is forbidden");
+})
 
 // Logger -morgan
 // app.use((req,resp,next)=>{
