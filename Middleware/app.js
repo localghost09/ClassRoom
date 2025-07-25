@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const ExpressError = require('./ExpressError');
 
 //middleware -> response send
 
@@ -9,15 +10,27 @@ const app = express();
     
 // });
 
-app.use("/api",(req,resp,next)=>{
+const checkToken = (req,resp,next)=>{
     let {tokens} = req.query;
     if(tokens === "giveaccess"){
         next();
     }
-    resp.send("ACCESS DENIED"); 
+    throw new ExpressError(404,"ACCESS DENIED"); 
+};
+
+app.get("/api", checkToken,(req,resp)=>{
+    resp.send("data");
+})
+
+app.get("/",(req,resp)=>{
+    resp.send("hey i am root"); 
 });
 
-app.get("/wrong",(req,resp)=>{
+app.get("/random", (req,resp)=>{
+    resp.send("this is random page");
+});
+
+app.get("/err",(req,resp)=>{
     abcd = abcd;
 })
 
@@ -31,22 +44,19 @@ app.get("/wrong",(req,resp)=>{
 //     next(); 
 // })
 
-app.get("/",(req,resp)=>{
-    resp.send("hey i am root"); 
-});
 
-app.get("/random", (req,resp)=>{
-    resp.send("this is random page");
-});
+
 
 app.use((err,req,resp,next)=>{
-    console.log(err);
-    
+    console.log("-------ERROR-------");
+    resp.send(err);
 });
 
-app.use((req,resp)=>{
-    resp.status(404).send("Page not found");
-})
+
+
+// app.use((req,resp)=>{
+//     resp.status(404).send("Page not found");
+// })
 
 app.listen(8080, ()=>{
     console.log("Server Listing to port 8080");
