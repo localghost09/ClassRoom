@@ -17,8 +17,8 @@ app.use("/api",(req,resp,next)=>{
     resp.send("ACCESS DENIED"); 
 });
 
-app.get("/api",(req,resp)=>{
-    resp.send("data");
+app.get("/wrong",(req,resp)=>{
+    abcd = abcd;
 })
 
 // Logger -morgan
