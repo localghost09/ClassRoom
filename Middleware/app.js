@@ -48,8 +48,8 @@ app.get("/err",(req,resp)=>{
 
 
 app.use((err,req,resp,next)=>{
-    console.log("-------ERROR-------");
-    resp.send(err);
+    let {status = 500, message="some error occured"} = err;
+    resp.status(status).send(message);
 });
 
 
