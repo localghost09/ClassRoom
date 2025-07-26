@@ -53,7 +53,7 @@ app.get("/listings/:id",async(req,resp)=>{
 })
 
 //Create Route
-app.post("/listings", async(req,resp)=>{
+app.post("/listings", async(req,resp,next)=>{
     // Convert string URL to image object if needed
     if (typeof req.body.listing.image === 'string') {
         req.body.listing.image = {
@@ -61,10 +61,15 @@ app.post("/listings", async(req,resp)=>{
             url: req.body.listing.image
         };
     }
-    const newlistings = new Listing(req.body.listing);
-    console.log(newlistings);
-    await newlistings.save();
-    resp.redirect("/listings");
+
+    try{
+        const newlistings = new Listing(req.body.listing);
+        await newlistings.save();
+        resp.redirect("/listings");
+    } catch(err){
+        next(err);
+    }
+    
     
 })
 
@@ -108,6 +113,9 @@ app.delete("/listings/:id", async(req,resp)=>{
     
 // })
 
+app.use((err,req,resp,next)=>{
+    resp.send("something went wrong");  
+})
 
 app.listen(port,()=>{
     console.log(`Listening On Port ${port}`);
