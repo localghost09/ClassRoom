@@ -7,6 +7,7 @@ const path = require("path");
 const { log } = require("console");
 const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utlis/wrapAsycn.js");
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
@@ -53,7 +54,7 @@ app.get("/listings/:id",async(req,resp)=>{
 })
 
 //Create Route
-app.post("/listings", async(req,resp,next)=>{
+app.post("/listings", wrapAsync(async(req,resp,next)=>{
     // Convert string URL to image object if needed
     if (typeof req.body.listing.image === 'string') {
         req.body.listing.image = {
@@ -61,17 +62,10 @@ app.post("/listings", async(req,resp,next)=>{
             url: req.body.listing.image
         };
     }
-
-    try{
         const newlistings = new Listing(req.body.listing);
         await newlistings.save();
         resp.redirect("/listings");
-    } catch(err){
-        next(err);
-    }
-    
-    
-})
+}))
 
 //edit Route
 app.get("/listings/:id/edit",async(req,resp)=>{
