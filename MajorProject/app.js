@@ -103,10 +103,13 @@ app.delete("/listings/:id", wrapAsync(async(req,resp)=>{
 //     resp.send("succesfully tested");
     
 // })
+app.all("*",(req,resp,next)=>{
+    next(new ExpressError(404,"Page Not Found"))
+})
 
 app.use((err,req,resp,next)=>{
     let {statusCode=500, message="Something went wrong"} = err;
-    resp.status(statusCode).send(message); 
+    resp.status(statusCode).render("listings/error.ejs",{message});
 })
 
 app.listen(port,()=>{
