@@ -1,18 +1,17 @@
 const express = require("express")
 const app = express();
 const mongoose = require("mongoose")
-const Listening = require("../MajorProject/models/listing.js");
-const Listing = require("../MajorProject/models/listing.js");
+const Listing = require("./models/listing.js");
 const path = require("path");
-const { log } = require("console");
 const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utlis/wrapAsycn.js");
+const wrapAsync = require("./utils/wrapAsycn.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
 main().then(()=>{
-    console.log("Connected to db");
+    console.log("Connected to db"); 
     
 }).catch((err)=>{
     console.log(err);
@@ -35,23 +34,22 @@ app.get("/",(req,resp)=>{
     resp.send("working");
 })
 //  Index Route
-app.get("/listings",async(req,resp)=>{
+app.get("/listings",wrapAsync(async(req,resp)=>{
     const allListings = await Listing.find({});
-    resp.render("../views/listings/index.ejs",{allListings});
-})
+    resp.render("listings/index.ejs",{allListings});
+}));
 
 // New Route
 app.get("/listings/new",(req,resp)=>{
     resp.render("listings/new.ejs");
 })
- 
 
 //Show Route
-app.get("/listings/:id",async(req,resp)=>{
+app.get("/listings/:id",wrapAsync(async(req,resp)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
     resp.render("listings/show.ejs", {listing});
-})
+}));
 
 //Create Route
 app.post("/listings", wrapAsync(async(req,resp,next)=>{
@@ -68,30 +66,30 @@ app.post("/listings", wrapAsync(async(req,resp,next)=>{
 }))
 
 //edit Route
-app.get("/listings/:id/edit",async(req,resp)=>{
+app.get("/listings/:id/edit",wrapAsync(async(req,resp)=>{
     let {id} = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id);    
     resp.render("listings/edit.ejs",{listing});
-})
+}))
 
 
 // update route 
-
-app.put("/listings/:id",async(req,resp)=>{
+app.put("/listings/:id",wrapAsync(async(req,resp)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    resp.redirect("/listings");
-})
+    resp.redirect(`/listings/${id}`);
+}))
 
 
 // delete route 
-app.delete("/listings/:id", async(req,resp)=>{
+app.delete("/listings/:id", wrapAsync(async(req,resp)=>{
     let {id} = req.params;
     let deletelistings = await Listing.findByIdAndDelete(id);
     console.log(deletelistings);
-    
     resp.redirect("/listings");
-})
+}));
+
+
 
 // app.get("/testListing",async(req,resp)=>{
 //     let sampleListening = new Listing ({
@@ -102,13 +100,14 @@ app.delete("/listings/:id", async(req,resp)=>{
 //         country : "India"
 //     });
 //     await sampleListening.save();
-//     console.log("sample was saved");
+//     console.log("sample was saved"); 
 //     resp.send("succesfully tested");
     
 // })
 
 app.use((err,req,resp,next)=>{
-    resp.send("something went wrong");  
+    let {statusCode=500, message="Something went wrong"} = err;
+    resp.status(statusCode).send(message); 
 })
 
 app.listen(port,()=>{
