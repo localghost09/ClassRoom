@@ -71,6 +71,9 @@ app.get("/listings/:id/edit",wrapAsync(async(req,resp)=>{
 
 // update route 
 app.put("/listings/:id",wrapAsync(async(req,resp)=>{
+    if(!req.body.listing){
+        throw new ExpressError(400,"Send Vaild data for listings");
+    }
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     resp.redirect(`/listings/${id}`);
