@@ -53,13 +53,9 @@ app.get("/listings/:id",wrapAsync(async(req,resp)=>{
 
 //Create Route
 app.post("/listings", wrapAsync(async(req,resp,next)=>{
-    // Convert string URL to image object if needed
-    if (typeof req.body.listing.image === 'string') {
-        req.body.listing.image = {
-            filename: "listingimage",
-            url: req.body.listing.image
-        };
-    }
+        if(!req.body.listing){
+            throw new ExpressError(400,"Send Vaild data for listings");
+        }
         const newlistings = new Listing(req.body.listing);
         await newlistings.save();
         resp.redirect("/listings");
