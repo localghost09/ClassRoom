@@ -7,6 +7,7 @@ const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsycn.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
@@ -53,8 +54,10 @@ app.get("/listings/:id",wrapAsync(async(req,resp)=>{
 
 //Create Route
 app.post("/listings", wrapAsync(async(req,resp,next)=>{
-        if(!req.body.listing){
-            throw new ExpressError(400,"Send Vaild data for listings");
+        let result = listingSchema.validate(req.body);
+        console.log(result);
+        if(result.error){
+            throw new ExpressError(400,result.error);
         }
         const newlistings = new Listing(req.body.listing);
         await newlistings.save();
