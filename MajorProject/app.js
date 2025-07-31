@@ -33,7 +33,20 @@ app.use(express.static(path.join(__dirname, "/public")));
 const port = 8080;
 app.get("/",(req,resp)=>{
     resp.send("working");
-})
+});
+
+const validateListing = (req,resp,next)=>{
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+};
+
+
+
 //  Index Route
 app.get("/listings",wrapAsync(async(req,resp)=>{
     const allListings = await Listing.find({});
@@ -53,12 +66,7 @@ app.get("/listings/:id",wrapAsync(async(req,resp)=>{
 }));
 
 //Create Route
-app.post("/listings", wrapAsync(async(req,resp,next)=>{
-        let result = listingSchema.validate(req.body);
-        console.log(result);
-        if(result.error){
-            throw new ExpressError(400,result.error);
-        }
+app.post("/listings",validateListing, wrapAsync(async(req,resp,next)=>{
         const newlistings = new Listing(req.body.listing);
         await newlistings.save();
         resp.redirect("/listings");
@@ -73,10 +81,7 @@ app.get("/listings/:id/edit",wrapAsync(async(req,resp)=>{
 
 
 // update route 
-app.put("/listings/:id",wrapAsync(async(req,resp)=>{
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send Vaild data for listings");
-    }
+app.put("/listings/:id",validateListing,wrapAsync(async(req,resp)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     resp.redirect(`/listings/${id}`);
