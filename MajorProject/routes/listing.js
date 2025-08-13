@@ -1,0 +1,70 @@
+const express = require("express")
+const router = express.Router();
+const wrapAsync = require("../utils/wrapAsycn.js");
+const ExpressError = require("../utils/ExpressError.js");
+const {listingSchema , reviewSchema} = require("../schema.js");
+const Listing = require("../models/listing.js");
+
+
+const validateListing = (req,resp,next)=>{
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg );
+    }else{
+        next();
+    }
+};
+
+//  Index Route
+router.get("/",wrapAsync(async(req,resp)=>{
+    const allListings = await Listing.find({});
+    resp.render("listings/index.ejs",{allListings});
+}));
+
+// New Route
+router.get("/new",(req,resp)=>{
+    resp.render("listings/new.ejs");
+})
+
+//Show Route
+router.get("/:id",wrapAsync(async(req,resp)=>{
+    let {id} = req.params;
+    const listing = await Listing.findById(id).populate("reviews");
+    resp.render("listings/show.ejs", {listing});
+}));
+
+
+//Create Route
+router.post("/",validateListing, wrapAsync(async(req,resp,next)=>{
+        const newlistings = new Listing(req.body.listing);
+        await newlistings.save();
+        resp.redirect("/listings");
+}))
+
+//edit Route
+router.get("/:id/edit",wrapAsync(async(req,resp)=>{
+    let {id} = req.params;
+    const listing = await Listing.findById(id);    
+    resp.render("listings/edit.ejs",{listing});
+}))
+
+
+// update route 
+router.put("/:id",validateListing,wrapAsync(async(req,resp)=>{
+    let {id} = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    resp.redirect(`/listings/${id}`);
+}))
+
+
+// delete route 
+router.delete("/:id", wrapAsync(async(req,resp)=>{
+    let {id} = req.params;
+    let deletelistings = await Listing.findByIdAndDelete(id);
+    console.log(deletelistings);
+    resp.redirect("/listings");
+}));
+
+
+module.exports = router
