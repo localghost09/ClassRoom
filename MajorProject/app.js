@@ -1,16 +1,14 @@
 const express = require("express")
 const app = express();
 const mongoose = require("mongoose")
-const Listing = require("./models/listing.js");
 const path = require("path");
 const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsycn.js");
 const ExpressError = require("./utils/ExpressError.js");
-const {listingSchema , reviewSchema} = require("./schema.js");
-const Review = require("./models/review.js");
+
 
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/reviews.js");
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
@@ -40,64 +38,12 @@ app.get("/",(req,resp)=>{
 
 
 
-const validateReview = (req,resp,next)=>{
-    let {error} = reviewSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el)=>el.message).join(",");
-        throw new ExpressError(400,errMsg );
-    }else{
-        next();
-    }
-};
+
 
 app.use("/listings", listings);
+app.use("/listings/:id/reviews",reviews);
 
 
-
-
-
-//Reviews
-//post review  route
-
-app.post("/listings/:id/reviews",validateReview, wrapAsync(async(req,resp)=>{
-    let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(req.body.review);
-
-    listing.reviews.push(newReview);
-
-    await newReview.save();
-    await listing.save();
-
-    console.log("new review saved");
-    resp.redirect(`/listings/${listing._id}`);
-    
-
-}))
-
-// delete review route
-
-app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,resp)=>{
-    let {id , reviewId} = req.params;
-
-    await Listing.findByIdAndUpdate(id, {$pull : {reviews : reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-
-    resp.redirect(`/listings/${id}`);
-}))
-
-// app.get("/testListing",async(req,resp)=>{
-//     let sampleListening = new Listing ({
-//         titile : "MY new Villa",
-//         description : "By the beach",
-//         price : 1200,
-//         location : " Calangute, Goa",
-//         country : "India"
-//     });
-//     await sampleListening.save();
-//     console.log("sample was saved"); 
-//     resp.send("succesfully tested");
-    
-// })
 app.all("*",(req,resp,next)=>{
     next(new ExpressError(404,"Page Not Found"))
 })
