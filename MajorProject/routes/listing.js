@@ -64,6 +64,7 @@ router.put("/:id",validateListing,wrapAsync(async(req,resp)=>{
     if(!listing){
         throw new ExpressError(404, "Listing not found!");
     }
+    req.flash("success", " Listing Updated");
     resp.redirect(`/listings/${id}`);
 }))
 
