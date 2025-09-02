@@ -69,7 +69,15 @@ app.get("/",(req,resp)=>{
     resp.send("working");
 });
 
+app.get("/demouser",async(req,resp)=>{
+    let fakeuser = new User({
+        email : "nikhilprataps66@gmail.com",
+        username : "delta-nikhil"
+    });
 
+    let registerUser = await User.register(fakeuser,"helloworld");
+    resp.send(registerUser);
+})
 
 
 
