@@ -24,6 +24,10 @@ router.get("/",wrapAsync(async(req,resp)=>{
 
 // New Route
 router.get("/new",(req,resp)=>{
+    if(!req.isAuthenticated()){
+        req.flash("error", "you must be logged in to create listings");
+        return resp.redirect("/login");
+    }
     resp.render("listings/new.ejs");
 })
 
@@ -51,6 +55,10 @@ router.post("/",validateListing, wrapAsync(async(req,resp,next)=>{
 router.get("/:id/edit",wrapAsync(async(req,resp)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
+    if(!req.isAuthenticated()){
+        req.flash("error", "you must be logged in to create listings");
+        return resp.redirect("/login");
+    }
     if(!listing){
         req.flash("error", "Listing your requested for does not exist!");
         resp.redirect("/listings");
