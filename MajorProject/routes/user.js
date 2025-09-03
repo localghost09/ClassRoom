@@ -33,7 +33,7 @@ router.post("/signup", wrapAsycn(async(req,resp)=>{
 );
     // for loggedin
 router.get("/login", (req,resp)=>{
-    resp.render("users/login.ejs")
+    resp.render("users/login.ejs") 
 })
 
 router.post("/login",saveRedirectUrl,passport.authenticate("local",{failureRedirect : "/login", failureFlash : true,}), async(req,resp)=>{
