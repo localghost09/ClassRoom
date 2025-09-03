@@ -24,7 +24,7 @@ router.post("/signup", wrapAsycn(async(req,resp)=>{
     }
     })
 );
-    
+    // for loggedin
 router.get("/login", (req,resp)=>{
     resp.render("users/login.ejs")
 })
@@ -41,7 +41,8 @@ router.get("/logout", (req,resp,next)=>{
         if(err){
             return next(err);
         }
-        req.flash("success", "you are successfully logged out")
+        req.flash("success", "you are successfully logged out");
+        resp.redirect("/listings");
     })
 })
 
